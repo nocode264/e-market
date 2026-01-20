@@ -1,10 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 
-
-app.use(cors({
-  origin: "*",
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",        // dev
+      "https://e-market-ebon.vercel.app/",  // prod
+    ],
+    credentials: true,
+  })
+);
 
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
