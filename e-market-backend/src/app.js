@@ -6,16 +6,12 @@ const productRoutes = require("./routes/product.routes");
 const orderRoutes = require("./routes/order.routes");
 const adminRoutes = require("./routes/admin.routes");
 
-const app = express();
+const app = express;
 
-// ✅ CORS COMPATIBLE NODE 22 + RENDER
+// 🔥 CORS SIMPLE ET SOLIDE (RECOMMANDÉ SUR RENDER FREE)
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://e-market-ebon.vercel.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  origin: true, // ← autorise toute origine
+  credentials: true,
 }));
 
 app.use(express.json());
