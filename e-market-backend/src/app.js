@@ -12,22 +12,22 @@ const app = express();
 // ✅ CORS propre pour frontend déployé + localhost
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://e-market-ebon.vercel.app",
   "https://e-market-m3nkkdxbp-mohameds-projects-5089f233.vercel.app"
 ];
 
 app.use(cors({
-  origin: function(origin, callback){
-    // Autoriser les requêtes sans origin (Postman)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = 'CORS policy: access denied';
-      return callback(new Error(msg), false);
+  origin: function(origin, callback) {
+    // autoriser les requêtes sans origin (Postman, tests server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS policy: access denied"));
     }
-    return callback(null, true);
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"],
 }));
 
 app.use(express.json());
