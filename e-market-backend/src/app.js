@@ -9,25 +9,11 @@ const userRoutes = require("./routes/user.routes");
 
 const app = express();
 
-// ✅ CORS propre pour frontend déployé + localhost
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://e-market-ebon.vercel.app",
-  "https://e-market-m3nkkdxbp-mohameds-projects-5089f233.vercel.app"
-];
-
+// ⚡ CORS GLOBAL - compatible Render/Vercel
 app.use(cors({
-  origin: function(origin, callback) {
-    // autoriser les requêtes sans origin (Postman, tests server-to-server)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("CORS policy: access denied"));
-    }
-  },
+  origin: '*', // autorise toutes les origines
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 
 app.use(express.json());
