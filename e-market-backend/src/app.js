@@ -1,15 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",        // dev
-      "https://e-market-ebon.vercel.app/",  // prod
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: "*",
+}));
 
 const authRoutes = require("./routes/auth.routes");
 const productRoutes = require("./routes/product.routes");
@@ -18,10 +12,16 @@ const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173", // Vite
-  credentials: true,
-}));
+// ✅ CORS PROPRE (DEV + PROD)
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://e-market-ebon.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
