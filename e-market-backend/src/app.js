@@ -7,10 +7,21 @@ const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
-// ✅ CORS PROPRE (DEV + PROD)
-app.use(cors());
-app.use(express.json());
+const cors = require("cors");
 
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://e-market-ebon.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
+
+app.options("*", cors());
+
+app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
