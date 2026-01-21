@@ -8,7 +8,7 @@ const adminRoutes = require("./routes/admin.routes");
 const app = express();
 
 // ✅ CORS PROPRE (DEV + PROD)
-app.options("*", cors());
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
