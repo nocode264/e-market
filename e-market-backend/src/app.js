@@ -8,15 +8,7 @@ const adminRoutes = require("./routes/admin.routes");
 const app = express();
 
 // ✅ CORS PROPRE (DEV + PROD)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://e-market-ebon.vercel.app",
-    ],
-    credentials: true,
-  })
-);
+app.options("*", cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
