@@ -7,16 +7,16 @@ const orderRoutes = require("./routes/order.routes");
 const adminRoutes = require("./routes/admin.routes");
 const userRoutes = require("./routes/user.routes");
 
-const app = express(); // 🔑 doit être une instance express
+const app = express();
 
-// ✅ CORS
+// CORS
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://e-market-ebon.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET","POST","PUT","DELETE"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 
 app.use(express.json());
@@ -28,8 +28,6 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API E-Market opérationnelle 🚀");
-});
+app.get("/", (req,res)=> res.send("API E-Market opérationnelle 🚀"));
 
-module.exports = app; // 🔑 doit exporter l'instance
+module.exports = app; // <-- on exporte uniquement app
