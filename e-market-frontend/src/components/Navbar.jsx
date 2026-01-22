@@ -12,8 +12,10 @@ export default function Navbar() {
       </Link>
 
       <div className="flex items-center gap-4">
-        <Link to="/" className="hover:text-gray-300">Produits</Link>
-
+        <Link to="/" className="hover:text-gray-300">
+          Produits
+        </Link>
+        {user && <Link to="/profile">Profil</Link>}
         {user && <Link to="/cart">Panier</Link>}
         {user && <Link to="/orders">Mes commandes</Link>}
 
@@ -29,21 +31,14 @@ export default function Navbar() {
         {!user ? (
           <>
             <Link to="/login">Login</Link>
-            <Link
-              to="/register"
-              className="bg-green-600 px-3 py-1 rounded"
-            >
+            <Link to="/register" className="bg-green-600 px-3 py-1 rounded">
               Register
             </Link>
           </>
         ) : (
-          <button
-            onClick={logout}
-            className="bg-red-600 px-3 py-1 rounded"
-          >
+          <button onClick={logout} className="bg-red-600 px-3 py-1 rounded">
             Logout
           </button>
-          
         )}
       </div>
     </nav>

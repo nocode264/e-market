@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Profile() {
   const [form, setForm] = useState({
@@ -12,7 +14,11 @@ export default function Profile() {
 
   useEffect(() => {
     api.get("/users/profile").then((res) => {
-      setForm({ ...form, name: res.data.name, email: res.data.email });
+      setForm((prev) => ({
+        ...prev,
+        name: res.data.name,
+        email: res.data.email,
+      }));
     });
   }, []);
 
@@ -22,7 +28,11 @@ export default function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put("/users/profile", form);
+      const res = await api.put("/users/profile", form);
+
+      setUser(res.data.user); // 🔥 MAJEUR
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       setMessage("Profil mis à jour avec succès");
       setForm({ ...form, password: "" });
     } catch {
