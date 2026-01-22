@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { addReview } = require("../controllers/product.controller");
 
 const {
   createProduct,
@@ -20,5 +21,6 @@ router.get("/:id", getProductById);
 router.post("/", protect, isSellerOrAdmin, createProduct);
 router.put("/:id", protect, isSellerOrAdmin, updateProduct);
 router.delete("/:id", protect, isSellerOrAdmin, deleteProduct);
+router.post("/:id/reviews", protect, addReview);
 
 module.exports = router;
